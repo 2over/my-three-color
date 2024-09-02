@@ -1,0 +1,2 @@
+D:/my-three-color/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/my-three-color/cmake-build-debug/CMakeFiles/rebuild_cache.dir
