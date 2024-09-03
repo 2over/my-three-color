@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: ziya_three_color
+# Project: my-three-color
 # Configurations: Debug
 # =============================================================================
 
@@ -40,6 +40,51 @@ include CMakeFiles/rules.ninja
 # Logical path to working directory; prefix for absolute paths.
 
 cmake_ninja_workdir = D$:/my-three-color/cmake-build-debug/
+# =============================================================================
+# Object build statements for EXECUTABLE target my-three-color
+
+
+#############################################
+# Order-only phony target for my-three-color
+
+build cmake_object_order_depends_target_my-three-color: phony || CMakeFiles/my-three-color.dir
+
+build CMakeFiles/my-three-color.dir/main.cpp.obj: CXX_COMPILER__my-three-color_unscanned_Debug D$:/my-three-color/main.cpp || cmake_object_order_depends_target_my-three-color
+  DEP_FILE = CMakeFiles\my-three-color.dir\main.cpp.obj.d
+  FLAGS = -std=c++11 -pthread -g -std=gnu++14 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\my-three-color.dir
+  OBJECT_FILE_DIR = CMakeFiles\my-three-color.dir
+
+build CMakeFiles/my-three-color.dir/src/memory/memory_chunk.cpp.obj: CXX_COMPILER__my-three-color_unscanned_Debug D$:/my-three-color/src/memory/memory_chunk.cpp || cmake_object_order_depends_target_my-three-color
+  DEP_FILE = CMakeFiles\my-three-color.dir\src\memory\memory_chunk.cpp.obj.d
+  FLAGS = -std=c++11 -pthread -g -std=gnu++14 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\my-three-color.dir
+  OBJECT_FILE_DIR = CMakeFiles\my-three-color.dir\src\memory
+
+build CMakeFiles/my-three-color.dir/src/memory/memory_pool.cpp.obj: CXX_COMPILER__my-three-color_unscanned_Debug D$:/my-three-color/src/memory/memory_pool.cpp || cmake_object_order_depends_target_my-three-color
+  DEP_FILE = CMakeFiles\my-three-color.dir\src\memory\memory_pool.cpp.obj.d
+  FLAGS = -std=c++11 -pthread -g -std=gnu++14 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\my-three-color.dir
+  OBJECT_FILE_DIR = CMakeFiles\my-three-color.dir\src\memory
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target my-three-color
+
+
+#############################################
+# Link the executable my-three-color.exe
+
+build my-three-color.exe: CXX_EXECUTABLE_LINKER__my-three-color_Debug CMakeFiles/my-three-color.dir/main.cpp.obj CMakeFiles/my-three-color.dir/src/memory/memory_chunk.cpp.obj CMakeFiles/my-three-color.dir/src/memory/memory_pool.cpp.obj
+  FLAGS = -std=c++11 -pthread -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\my-three-color.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = my-three-color.exe
+  TARGET_IMPLIB = libmy-three-color.dll.a
+  TARGET_PDB = my-three-color.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -66,6 +111,8 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
+build my-three-color: phony my-three-color.exe
+
 # =============================================================================
 # Folder targets.
 
@@ -74,7 +121,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: D:/my-three-color/cmake-build-debug
 
-build all: phony
+build all: phony my-three-color.exe
 
 # =============================================================================
 # Built-in targets

@@ -1,10 +1,22 @@
 cmake_minimum_required(VERSION 3.19)
-project(ziya_three_color)
+project(my-three-color)
 
 set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_CXX_FLAGS "${CAMKE_CXX_FLAGS} -std=c++11 -pthread")
 
-add_executable(ziya_three_color main.cpp main-map.cpp include/container/stack.h include/container/stack.cpp share/vm/utilities/BasicType.h example/main-stw.cpp include/core/Monitor.h include/core/Monitor.cpp include/core/Thread.h include/core/Thread.cpp include/core/ParkEvent.h include/core/ParkEvent.cpp include/common.h include/core/HeapWord.h include/core/HeapWord.cpp src/memory/memory_pool.cpp src/memory/memory_chunk.cpp src/memory/memory_cell.cpp src/gc/mark_clean.cpp src/gc/mark_compact.cpp src/gc/mark_copy.cpp src/gc/gc_factory.cpp include/core/VMThread.cpp include/core/VMThread.h include/core/SafepointSynchronize.cpp include/core/SafepointSynchronize.h include/core/Threads.cpp include/core/Threads.h share/vm/memory/ResourceObj.h share/vm/compiler/OopMap.cpp share/vm/compiler/OopMap.h share/vm/runtime/StackValue.cpp share/vm/runtime/StackValue.h share/vm/oops/OopDesc.cpp share/vm/oops/OopDesc.h share/vm/compiler/OopMapSet.cpp share/vm/compiler/OopMapSet.h share/vm/code/CompressedStream.cpp share/vm/code/CompressedStream.h share/vm/code/CompressedReadStream.cpp share/vm/code/CompressedReadStream.h share/vm/code/CompressedWriteStream.cpp share/vm/code/CompressedWriteStream.h share/vm/oops/Klass.cpp share/vm/oops/Klass.h include/container/Container.cpp include/container/Container.h include/container/Array.cpp include/container/Array.h include/core/ThreeColorMap.cpp include/core/ThreeColorMap.h src/gc/ConcurrentMark.cpp include/gc/ConcurrentMark.h include/container/Queue.cpp include/container/Queue.h share/vm/memory/BarrierSet.cpp share/vm/memory/BarrierSet.h share/vm/memory/CardTableModRefBS.cpp share/vm/memory/CardTableModRefBS.h share/vm/memory/CardTableModRefBSForCTRS.cpp share/vm/memory/CardTableModRefBSForCTRS.h share/vm/gc_implememtation/g1/G1SATBCardTableModRefBS.cpp share/vm/gc_implememtation/g1/G1SATBCardTableModRefBS.h share/vm/memory/ModRefBarrierSet.cpp share/vm/memory/ModRefBarrierSet.h
-        src/memory/memory_cell.cpp
-        src/memory/memory_cell.h)
+add_executable(my-three-color
+        main.cpp
+        include/memory/memory_cell.h
+        include/memory/memory_chunk.h
+        include/memory/memory_pool.h
+        src/memory/memory_chunk.cpp
+        src/memory/memory_pool.cpp
+        include/common.h
+        include/gc/ConcurrentMark.h
+        include/gc/gc_factory.h
+        include/gc/mark_clean.h
+        include/gc/mark_compact.h
+        include/gc/mark_copy.h
+        include/gc/interface/garbage_collect.h
+)
