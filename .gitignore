@@ -1,3 +1,7 @@
 *.json
 /cmake-build-debug
-/.idea
+/.idea/misc.xml
+/.idea/vcs.xml
+/.idea/modules.xml
+/.idea/my-three-color.iml
+
