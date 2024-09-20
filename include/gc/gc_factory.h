@@ -1,8 +1,35 @@
 //
-// Created by 87766 on 2024/9/3.
+// Created by xiehao on 2024/9/6.
 //
 
-#ifndef ZIYA_THREE_COLOR_GC_FACTORY_H
-#define ZIYA_THREE_COLOR_GC_FACTORY_H
+#include "../common.h"
+#include "../memory/memory_pool.h"
 
-#endif //ZIYA_THREE_COLOR_GC_FACTORY_H
+
+typedef enum {
+    GC_STATUS_CLOSED,
+    GC_STATUS_WORKING
+} GC_STATUS;
+
+class GCFactory {
+private:
+    GC_STATUS m_status;
+
+public:
+    static GCFactory *get_instance() {
+        static GCFactory factory;
+        return &factory;
+    }
+
+public:
+    GC_STATUS get_status();
+
+    GCFactory *set_status(GC_STATUS status);
+
+public:
+    void minor_run(GC_TYPE type, MemoryChunk *mem_chunk);
+
+    void major_run(GC_TYPE type, MemoryChunk *mem_chunk);
+
+    void full_run(GC_TYPE type, MemoryPool *memoryPool);
+};

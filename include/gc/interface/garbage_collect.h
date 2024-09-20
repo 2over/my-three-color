@@ -1,8 +1,12 @@
 //
-// Created by 87766 on 2024/9/3.
+// Created by xiehao on 2024/9/6.
 //
 
-#ifndef ZIYA_THREE_COLOR_GARBAGE_COLLECT_H
-#define ZIYA_THREE_COLOR_GARBAGE_COLLECT_H
+#pragma once
 
-#endif //ZIYA_THREE_COLOR_GARBAGE_COLLECT_H
+using namespace std;
+
+class GarbageCollect {
+public:
+    virtual void run() = 0;
+};

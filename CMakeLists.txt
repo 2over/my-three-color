@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.16)
 project(my-three-color)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -19,4 +19,4 @@ add_executable(my-three-color
         include/gc/mark_compact.h
         include/gc/mark_copy.h
         include/gc/interface/garbage_collect.h
-)
+        include/gc/ConcurrentMark.h src/gc/ConcurrentMark.cpp include/core/Thread.h)

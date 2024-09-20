@@ -1,8 +1,14 @@
 //
-// Created by 87766 on 2024/9/3.
+// Created by xiehao on 2024/9/20.
 //
 
-#ifndef ZIYA_THREE_COLOR_CONCURRENTMARK_H
-#define ZIYA_THREE_COLOR_CONCURRENTMARK_H
+#ifndef MY_THREE_COLOR_CONCURRENTMARK_H
+#define MY_THREE_COLOR_CONCURRENTMARK_H
 
-#endif //ZIYA_THREE_COLOR_CONCURRENTMARK_H
+class ConcurrentMark {
+public:
+    static void mark();
+
+    static void final_mark();
+};
+#endif //MY_THREE_COLOR_CONCURRENTMARK_H
