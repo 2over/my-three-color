@@ -25,6 +25,6 @@ enum ThreadState {
 
 class Thread {
 private:
-    stri
+    strj g
 };
 #endif //MY_THREE_COLOR_THREAD_H

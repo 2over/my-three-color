@@ -3,6 +3,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <memory.h>
+#include <sys/mman.h>
+#include <signal.h>
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stack>
+#include <list>
+#include <map>
+#include <sstream>
+#include <queue>
 
 using namespace std;
 
@@ -27,7 +39,83 @@ typedef enum {
     GC_G1,
 } GC_TYPE;
 
+#define UseParallelGC false
+#define UseG1GC false
+#define UseSerialGC false
+#define UseConcMarkSweepGC false
+#define UseAdaptiveSizePolicy false
+
 #define DEFAULT_GC_TYPE GC_MARK_CLEAN
+typedef void* (*thread_fun)(void *);
+
+// Tips: globalDefinitions.hpp
+
+// JavaThreadState keeps track of which part of the code a thread is executing in.
+// This information is needed by the safepoint code.
+
+// There are 4 essential states:
+//
+// _thread_new          : Just started, but not executed init. code yet(most likely still in OS init code)
+// _thread_in_native    : In native code. This is a safepoint region, since all oops will be in jobject handles
+// _thread_in_vm        : Executing in the vm
+// _thread_in_Java      : Executing either interpreted or compiled Java code(or could be in a stub)
+
+// Each state has an associated xxxx_trans state, which is an intermediate state used when a thread is in
+// a transaction from one state to another. These extra states make it possible for the safepoint code to
+// handle certain thread_states without having to suspend the thread - making eht safepoint code faster
+//
+// Given a state, the xxx_tranns state can always be found by adding 1.
+
+enum JavaThreadState {
+    _thread_unitialized         = 0, // should never happen (mssing initialization)
+    _thread_new                 = 2, // just starting up, i.e, in process of being initialized
+    _thread_new_trans           = 3, // corresponding transition state (not used, included for completness)
+    _thread_in_native           = 4, // running in native code
+    _thread_in_native_trans     = 5, // corresponding transition state
+    _thread_in_vm               = 6, // running in vm
+    _thread_vm_trans            = 7, // corresponding transition state
+    _thread_in_java             = 8, // running in Java or in stub code
+    _thread_in_java_trans       = 9, // corresponding transition state (not used, included for completness)
+    _thread_blocked             = 10, // blocked in vm
+    _thread_blocked_trans       = 11, // corresponding transition state
+    _thread_max_state           = 12 // maximum thread state + 1 - used for statistics allocation
+};
+
+// jni.h
+// gobalDefinitions_gcc.hpp
+typedef unsigned char       jubyte;
+typedef unsigned short      jushort;
+typedef unsigned int        juint;
+typedef int                 jint;
+typedef unsigned long long  julong;
+typedef long                jlong;
+typedef unsigned char       jboolean;
+typedef unsigned short      jchar;
+typedef short               jshort;
+typedef float               jfloat;
+typedef double              jdouble;
+typedef signed char         jbyte;
+
+// globalDefinitions.hpp
+
+inline int low (long value)         { return int(value);    }
+inline int high(long value)         { return int(value >> 32);  }
+
+// the fancy casts are a hopefully portable way
+// to do unsigned 32 to 64 bit type conversion
+inline void set_low(jlong* value, jint low) {
+    *value &= (jlong)0xffffffff << 32;
+    *value |= (jlong)(julong)(juint)low;
+}
+
+inline void set_high(jlong * value, jint high) {
+    *value &= (jlong)(julong)(juint)0xffffffff;
+    *value |= (jlong)high << 32;
+}
+
+
+
+
 /**
  * 自定义打印输出
  */

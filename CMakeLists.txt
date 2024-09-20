@@ -19,4 +19,4 @@ add_executable(my-three-color
         include/gc/mark_compact.h
         include/gc/mark_copy.h
         include/gc/interface/garbage_collect.h
-        include/gc/ConcurrentMark.h src/gc/ConcurrentMark.cpp include/core/Thread.h)
+        include/gc/ConcurrentMark.h src/gc/ConcurrentMark.cpp include/core/Thread.h share/vm/oops/OopDesc.h)
