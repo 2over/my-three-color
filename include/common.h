@@ -31,6 +31,7 @@ typedef union {
 } Align;
 
 #define  ALIGN_SIZE     (sizeof(Align))
+#define MinOopMapAllocation 0x50
 
 typedef enum {
     GC_MARK_CLEAN,
