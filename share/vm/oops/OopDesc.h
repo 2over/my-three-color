@@ -33,7 +33,43 @@ public:
     oop oop_store(int index, oop new_oop);
     void oop_store(oop new_oop);
 
+public:
+    vector<oop>& field_oops() {
+        return _field_oops;
+    }
 
+    // Fast access to barrier set
+    static BarrierSet* bs() {
+        return _bs;
+    }
+
+    static void set_bs(BarrierSet* bs) {
+        _bs = bs;
+    }
+
+    char gc_mark() {
+        return _gc_mark;
+    }
+
+    void set_gc_mark(char v) {
+        _gc_mark = v;
+    }
+
+    void set_sign(char c) {
+        _sign = c;
+    }
+
+    char sign() {
+        return _sign;
+    }
+
+    MemoryCell* mem_cell() {
+        return _mem_cell;
+    }
+
+    void set_mem_cell(MemoryCell* cell) {
+        _mem_cell = cell;
+    }
 
 };
 

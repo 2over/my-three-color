@@ -10,12 +10,23 @@
 
 class Thread;
 
-class ThreadColorMap {
+class ThreeColorMap {
 private:
     queue<oop>  _white_table;
     queue<oop>  _gray_table;
     queue<oop>  _black_table;
 
 public:
+    queue<oop>& white_table() {
+        return _white_table;
+    }
+
+    queue<oop>& gray_table() {
+        return _gray_table;
+    }
+
+    queue<oop>& black_table() {
+        return _black_table;
+    }
 };
 #endif //MY_THREE_COLOR_THREECOLORMAP_H
