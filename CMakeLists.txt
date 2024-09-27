@@ -19,4 +19,4 @@ add_executable(my-three-color
         include/gc/mark_compact.h
         include/gc/mark_copy.h
         include/gc/interface/garbage_collect.h
-        include/gc/ConcurrentMark.h src/gc/ConcurrentMark.cpp include/core/Thread.h share/vm/oops/OopDesc.h share/vm/compiler/OopMapSet.cpp share/vm/compiler/OopMap.h share/vm/utilities/BasicType.h share/vm/memory/ResourceObj.h share/vm/compiler/OopMapSet.h include/core/ThreeColorMap.h include/core/ThreeColorMap.cpp include/container/Array.h include/container/Container.h share/vm/oops/Klass.cpp share/vm/oops/Klass.h include/core/Threads.h example/main-stw.cpp include/core/Thread.cpp)
+        include/gc/ConcurrentMark.h src/gc/ConcurrentMark.cpp include/core/Thread.h share/vm/oops/OopDesc.h share/vm/compiler/OopMapSet.cpp share/vm/compiler/OopMap.h share/vm/utilities/BasicType.h share/vm/memory/ResourceObj.h share/vm/compiler/OopMapSet.h include/core/ThreeColorMap.h include/core/ThreeColorMap.cpp include/container/Array.h include/container/Container.h share/vm/oops/Klass.cpp share/vm/oops/Klass.h include/core/Threads.h example/main-stw.cpp include/core/Thread.cpp include/core/Monitor.cpp include/core/Monitor.h)
