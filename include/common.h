@@ -163,6 +163,22 @@ inline void set_high(jlong * value, jint high) {
     } \
 }while(0)
 
+#define assert(cond, msg) { \
+    if (!(cond)) {\
+        fprintf(stderr, "assert fail %s %d: %s\n", __FILE__,__LINE__, msg);\
+        abort(); \
+    }\
+}
 
+#define WRITE(str) do { \
+    write(STDOUT_FILENO, str, strlen); \
+}while(0)
+
+#define ASSERT_ZERO(status, str) do {\
+    if (0 != status) {\
+        WRITE(str); \
+        exit(-1); \
+    }\
+}while(0)
 
 
