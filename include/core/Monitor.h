@@ -10,11 +10,13 @@
 
 class Monitor {
 private:
-    Thread*     _owner;
+    Thread *_owner;
 public:
-    void wait(Thread* t);
-    void notify(Thread* t);
-    void notify_all(Thread* t);
+    void wait(Thread *t);
+
+    void notify(Thread *t);
+
+    void notify_all(Thread *t);
 
 };
 
