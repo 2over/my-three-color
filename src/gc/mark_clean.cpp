@@ -3,6 +3,8 @@
 //
 
 #include "../../include/gc/mark_clean.h"
+#include "../../share/vm/compiler/OopMapSet.h"
+#include "../../share/vm/compiler/OopMap.h"
 
 MarkClean::MarkClean(MemoryChunk *mem_chunk) : m_mem_chunk(mem_chunk) {
     INFO_PRINT("%s\n", __func__);
@@ -101,4 +103,16 @@ void MarkClean::run() {
 
     get_mem_chunk()->print_all_table();
     PRINT("[标记-清除算法]结束运行\n");
+}
+
+extern OopMapSet oopMapSet;
+
+extern ThreeColorMap threeColorMap;
+
+void MarkClean::mark_from_oops() {
+    INFO_PRINT("[vm thread] 开始标记Root\n");
+
+    for (int i = 0; i < oopMapSet.om_count(); i++) {
+        OopMap* map = OopMapSet.om_data()[i];
+    }
 }

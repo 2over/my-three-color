@@ -70,7 +70,7 @@ public:
     ~Thread();
 
 public:
-    ParkEvent* _ParkEvent; // for syncrhonized()
+    ParkEvent* _ParkEvent; // for synchronized()
 
     ParkEvent* _MutexEvent; // for native internal Mutex/Monitor
 

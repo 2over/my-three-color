@@ -4,6 +4,9 @@
 
 #pragma once
 
+#ifndef MY_THREE_COLOR_MARK_CLEAN_H
+#define MY_THREE_COLOR_MARK_CLEAN_H
+
 #include "interface/garbage_collect.h"
 #include "../memory/memory_chunk.h"
 
@@ -30,4 +33,8 @@ private:
 
 public:
     void run() override;
+    static void mark_from_oops();
+    static void clean(MemoryChunk*);
 };
+
+#endif //MY_THREE_COLOR_MARK_CLEAN_H

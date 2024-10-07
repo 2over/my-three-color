@@ -12,7 +12,7 @@ class Thread;
 class ParkEvent {
 private:
     /**
-     * 锁扎u嗯台
+     * 锁状态
      * 0 未锁
      * 1 已锁
      */

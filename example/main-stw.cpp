@@ -7,7 +7,12 @@
 #include "../include/memory/memory_pool.h"
 #include "../include/core/SafepointSynchronize.h"
 #include "../share/vm/oops/Klass.h"
+#include "../include/container/stack.h"
 #include "../share/vm/runtime/StackValue.h"
+#include "../include/core/ParkEvent.h"
+#include "../include/core/Threads.h"
+#include "../include/core/VMThread.h"
+#include "../include/gc/mark_clean.h"
 
 ThreeColorMap threeColorMap;
 
@@ -74,7 +79,81 @@ void* t1_do(void *arg) {
     StackValue* v4 = new StackValue(T_CHAR, 3);
     StackValue* v5 = new StackValue(T_OBJECT, e);
 
-    Self->stack()->push
-    Self->stack()->push_heap(v2);
+    Self->stack()->push(v1);
+    Self->stack()->push(v2);
+    Self->stack()->push(v3);
+    Self->stack()->push(v4);
+    Self->stack()->push(v5);
 
+    // 模拟程序运行
+    for (int i = 0; i < 1000000; ++i) {
+        INFO_PRINT("%s->%d\n", Self->name().c_str(), i);
+        sleep(1);
+        SafepointSynchronize::insert_safepoint();
+    }
+
+    return 0;
+}
+/**
+ * 用于模拟运行期间
+ * @param arg
+ * @return
+ */
+void* t2_do(void* arg) {
+    Thread* Self = static_cast<Thread *>(arg);
+    Self->_ParkEvent->park();
+
+    INFO_PRINT("线程%s: ");
+    return 0;
+}
+
+void user_thread_work() {
+    Thread* t1 = new Thread(t1_do, NULL, 1);
+    Thread* t2 = new Thread(thread_do, NULL, 2);
+
+    t1->run();
+    t2->run();
+
+    getchar();
+}
+
+int main() {
+    Threads::init_2();
+    SafepointSynchronize::init();
+
+    int v;
+    while (true) {
+        INFO_PRINT("请输入命令: \n");
+        cin >> v;
+        switch(v) {
+            case 1: {
+                user_thread_work();
+                break;
+            }
+            case 2: {
+                SafepointSynchronize::begin();
+                break;
+            }
+            case 3: {
+                SafepointSynchronize::end();
+                break;
+            }
+            case 4: {
+                /**
+                 * 开始遍历线程栈
+                 * 1 main线程去做这件事情
+                 * 2 线程池去做这件事情
+                 */
+                Threads::build_oop_maps();
+                break;
+            }
+            case 5: {
+                VMThread::run();
+                break;
+            }
+            case 6: {
+                MarkClean::mark_from_oops();
+            }
+        }
+    }
 }
