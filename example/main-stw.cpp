@@ -15,6 +15,7 @@
 #include "../include/gc/mark_clean.h"
 #include "../include/gc/ConcurrentMark.h"
 #include "../share/vm/oops/OopDesc.h"
+#include "../share/vm/memory/BarrierSet.h"
 
 ThreeColorMap threeColorMap;
 
@@ -53,8 +54,8 @@ oop e = (new Klass)->allocate_instance('E');
 oop h = (new Klass)->allocate_instance('H');
 oop j = (new Klass)->allocate_instance('J');
 
-void* t1_do(void *arg) {
-    Thread* Self = static_cast<Thread*>(arg);
+void *t1_do(void *arg) {
+    Thread *Self = static_cast<Thread *>(arg);
 
     // 模拟没有被引用的GC Root oop
     (new Klass)->allocate_instance('A');
@@ -72,14 +73,14 @@ void* t1_do(void *arg) {
 
     h->field_oops().push_back(j);
 
-    j->field_oops().push_back((new Klass)-> allocate_instance('K'));
+    j->field_oops().push_back((new Klass)->allocate_instance('K'));
 
     // 模拟数据入栈
-    StackValue* v1 = new StackValue(T_INT, 1);
-    StackValue* v2 = new StackValue(T_BYTE, 2);
-    StackValue* v3 = new StackValue(T_OBJECT, d);
-    StackValue* v4 = new StackValue(T_CHAR, 3);
-    StackValue* v5 = new StackValue(T_OBJECT, e);
+    StackValue *v1 = new StackValue(T_INT, 1);
+    StackValue *v2 = new StackValue(T_BYTE, 2);
+    StackValue *v3 = new StackValue(T_OBJECT, d);
+    StackValue *v4 = new StackValue(T_CHAR, 3);
+    StackValue *v5 = new StackValue(T_OBJECT, e);
 
     Self->stack()->push(v1);
     Self->stack()->push(v2);
@@ -96,13 +97,14 @@ void* t1_do(void *arg) {
 
     return 0;
 }
+
 /**
  * 用于模拟运行期间
  * @param arg
  * @return
  */
-void* t2_do(void* arg) {
-    Thread* Self = static_cast<Thread *>(arg);
+void *t2_do(void *arg) {
+    Thread *Self = static_cast<Thread *>(arg);
     Self->_ParkEvent->park();
 
     INFO_PRINT("线程%s: ");
@@ -110,8 +112,8 @@ void* t2_do(void* arg) {
 }
 
 void user_thread_work() {
-    Thread* t1 = new Thread(t1_do, NULL, 1);
-    Thread* t2 = new Thread(thread_do, NULL, 2);
+    Thread *t1 = new Thread(t1_do, NULL, 1);
+    Thread *t2 = new Thread(thread_do, NULL, 2);
 
     t1->run();
     t2->run();
@@ -127,7 +129,7 @@ int main() {
     while (true) {
         INFO_PRINT("请输入命令: \n");
         cin >> v;
-        switch(v) {
+        switch (v) {
             case 1: {
                 user_thread_work();
                 break;
@@ -171,6 +173,11 @@ int main() {
             }
             case 9: {
                 OopDesc::bs()->write_ref_field_pre(NULL);
+
+                break;
+            }
+            case 99: {
+                return 0;
             }
         }
     }
