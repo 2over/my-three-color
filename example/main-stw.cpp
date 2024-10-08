@@ -13,6 +13,8 @@
 #include "../include/core/Threads.h"
 #include "../include/core/VMThread.h"
 #include "../include/gc/mark_clean.h"
+#include "../include/gc/ConcurrentMark.h"
+#include "../share/vm/oops/OopDesc.h"
 
 ThreeColorMap threeColorMap;
 
@@ -153,6 +155,22 @@ int main() {
             }
             case 6: {
                 MarkClean::mark_from_oops();
+
+                ConcurrentMark::mark();
+                break;
+            }
+            case 7: {
+                MarkClean::clean(memChunk);
+
+                break;
+            }
+            case 8: {
+                INFO_PRINT("开始最终标记阶段\n");
+                ConcurrentMark::final_mark();
+                break;
+            }
+            case 9: {
+                OopDesc::bs()->write_ref_field_pre(NULL);
             }
         }
     }
