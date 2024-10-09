@@ -180,5 +180,8 @@ int main() {
                 return 0;
             }
         }
+
+        INFO_PRINT("end\n");
     }
+    return 0;
 }

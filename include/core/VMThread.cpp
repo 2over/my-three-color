@@ -7,7 +7,7 @@
 #include "SafepointSynchronize.h"
 #include "../../include/gc/gc_factory.h"
 
-extern MemoryChunk memChunk;
+extern MemoryChunk* memChunk;
 
 void VMThread::run() {
     if (!SafepointSynchronize::is_at_safepoint()) {

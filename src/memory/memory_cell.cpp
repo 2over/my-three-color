@@ -113,6 +113,12 @@ MemoryCell *MemoryCell::desc_size(uint step) {
 
 }
 
+void MemoryCell::zero() {
+    MemoryChunk *chunk = (MemoryChunk *) m_belong_chunk;
+
+    memset(ptr(), 0xCC, chunk->get_size());
+}
+
 bool MemoryCell::get_mark() {
     return m_mark;
 }
