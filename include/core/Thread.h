@@ -75,7 +75,7 @@ public:
     ParkEvent* _MutexEvent; // for native internal Mutex/Monitor
 
 private:
-    Monitor* _startThread_lock; // sync parenet and child in thread creation
+    Monitor* _startThread_lock; // sync parent and child in thread creation
 
 public:
     Monitor* startThread_lock() {

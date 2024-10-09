@@ -171,7 +171,7 @@ inline void set_high(jlong * value, jint high) {
 }
 
 #define WRITE(str) do { \
-    write(STDOUT_FILENO, str, strlen); \
+    write(STDOUT_FILENO, str, strlen(str)); \
 }while(0)
 
 #define ASSERT_ZERO(status, str) do {\
