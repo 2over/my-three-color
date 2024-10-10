@@ -40,6 +40,7 @@ static void mark_child(oop parent) {
             INFO_PRINT("\n\n [vm thread] 模拟少标:断开D->F,建立E->F(F不加入到灰色队列)\n\n");
 
             // D(灰色)断开了对F(白色)的引用
+            // 添加一层写屏障
             parent->oop_store(0, (new Klass)-> allocate_instance('L'));
 
             // E(黑色)建立了对F(白色)的引用，F是E的第二个属性
@@ -69,7 +70,7 @@ void ConcurrentMark::mark() {
         return ;
     }
 
-    // 为了后面的正常运行，一轮扫描完成需要晴空gray table，不清空会重复扫描
+    // 为了后面的正常运行，一轮扫描完成需要清空gray table，不清空会重复扫描
     for (int i = threeColorMap.gray_table().size() - 1; i >= 0; i--) {
         oop o = threeColorMap.gray_table().front();
 

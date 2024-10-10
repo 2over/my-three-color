@@ -37,6 +37,8 @@ void *thread_do(void *arg) {
 }
 
 /**
+ *
+ * 对象图结构
  * A
  * B
  * C
@@ -48,6 +50,7 @@ void *thread_do(void *arg) {
  *      | - I
  *      | - J
  *          | - K
+ *
  */
 oop d = (new Klass)->allocate_instance('D');
 oop e = (new Klass)->allocate_instance('E');
