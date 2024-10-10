@@ -31,7 +31,7 @@ void SafepointSynchronize::begin() {
         INFO_PRINT("\t [main thread]等待所有用户线程进入安全点\n");
         sleep(1);
     }
-    INFO_PRINT("\t [main thread] 所有用户线程进入安全点,推出\n");
+    INFO_PRINT("\t [main thread] 所有用户线程进入安全点,退出\n");
 
     _state = _synchronized;
 }

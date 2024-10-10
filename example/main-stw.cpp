@@ -181,7 +181,9 @@ int main() {
             }
         }
 
-        INFO_PRINT("end\n");
     }
+
+    INFO_PRINT("end\n");
+
     return 0;
 }

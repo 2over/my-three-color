@@ -153,7 +153,7 @@ void MemoryCell::to_string() {
 }
 
 void MemoryCell::to_string(char *msg) {
-    PRINT("[Cell信息]%s:start = %d, end = %d, size =%d\n", msg, m_start, m_end, m_size);
+//    PRINT("[Cell信息]%s:start = %d, end = %d, size =%d\n", msg, m_start, m_end, m_size);
 }
 
 pvoid MemoryCell::ptr() {

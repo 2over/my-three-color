@@ -15,7 +15,7 @@ public:
     }
 
 public:
-    CompressedReadStream(long* buffer, int position = 0):CompressedStream(buffer, position = 0) {
+    CompressedReadStream(long* buffer, int position = 0):CompressedStream(buffer, position) {
 
     }
 };

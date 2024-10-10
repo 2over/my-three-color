@@ -24,8 +24,6 @@ MemoryChunk::MemoryChunk(uint size, char *filename, uint line) : m_size(size), m
             m_used_cell_num = 0;
 
             m_available_table.push_front(new MemoryCell(0, m_cell_num));
-
-            print_available_table();
             break;
         }
         case GC_MARK_COPY: {
@@ -39,9 +37,12 @@ MemoryChunk::MemoryChunk(uint size, char *filename, uint line) : m_size(size), m
             print_idle_table();
             break;
         }
+
     }
 
+    print_available_table();
 
+    print_idle_table();
 }
 
 MemoryChunk::~MemoryChunk() {
@@ -64,8 +65,8 @@ MemoryCell *MemoryChunk::real_malloc(MemoryCell *available_cell, uint cell_num) 
      */
     pvoid ret = (pvoid) ((ulong) get_data() + available_cell->get_start() * get_align_size());
 
-    INFO_PRINT("[真正分配内存]Data起始地址=%X, cell_start =%d, ret =%X\n", get_data(), available_cell->get_start(),
-               ret);
+//    INFO_PRINT("[真正分配内存]Data起始地址=%X, cell_start =%d, ret =%X\n", get_data(), available_cell->get_start(),
+//               ret);
 #endif
 
     /**
@@ -237,7 +238,7 @@ MemoryCell *MemoryChunk::malloc(uint size) {
         ret = malloc(size);
     }
 
-    print_all_table();
+//    print_all_table();
     return ret;
 }
 

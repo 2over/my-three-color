@@ -118,6 +118,7 @@ extern ThreeColorMap threeColorMap;
 void MarkClean::mark_from_oops() {
     INFO_PRINT("[vm thread] 开始标记Root\n");
 
+//    INFO_PRINT("------------------------------%d\n", oopMapSet.om_count());
     for (int i = 0; i < oopMapSet.om_count(); i++) {
         OopMap *map = oopMapSet.om_data()[i];
 
@@ -125,6 +126,7 @@ void MarkClean::mark_from_oops() {
                                                                 map->write_stream()->position());
         INFO_PRINT("\t [vm thread] 开始处理线程%s的Root oop: %d\n",
                    map->thread()->name().c_str(), map->write_stream()->position());
+//        INFO_PRINT("------------------------------%d\n", stream->position());
         for (int j = 0; j < stream->position(); ++j) {
             oop o = oop(stream->read(j));
 

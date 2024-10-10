@@ -16,10 +16,10 @@ void *thread_run(void *arg) {
 
     Threads::add_current_thread(pthread_self(), t);
 
-    INFO_PRINT("[%s] 等待创建线程工作完成\n", t->name().c_str());
+//    INFO_PRINT("[%s] 等待创建线程工作完成\n", t->name().c_str());
     Monitor *sync = t->startThread_lock();
     sync->wait(t);
-    INFO_PRINT("[%s] 创建工作已完成，线程被唤醒\n", t->name().c_str());
+//    INFO_PRINT("[%s] 创建工作已完成，线程被唤醒\n", t->name().c_str());
 
     // 执行业务逻辑
     t->entry_point()(t);
@@ -70,7 +70,7 @@ void Thread::run() {
 
     while(true) {
         if (INITIALIZED == get_state()) {
-            INFO_PRINT("[notify] 创建线程工作已完成，尝试唤醒线程\n");
+//            INFO_PRINT("[notify] 创建线程工作已完成，尝试唤醒线程\n");
 
             set_state(RUNNABLE);
 

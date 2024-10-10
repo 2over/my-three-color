@@ -54,7 +54,7 @@ static void mark_child(oop parent) {
     }
 
     // 标记为和死
-    INFO_PRINT("\t [vm thread] 对象%c 属性便利万了，标记为黑色\n", parent->sign());
+    INFO_PRINT("\t [vm thread] 对象%c 属性遍历完了，标记为黑色\n", parent->sign());
 
     parent->set_gc_mark(true);
     parent->mem_cell()->set_mark(true);
