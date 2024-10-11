@@ -54,7 +54,7 @@ static void mark_child(oop parent) {
         threeColorMap.gray_table().push(o);
     }
 
-    // 标记为和死
+    // 标记为黑色
     INFO_PRINT("\t [vm thread] 对象%c 属性遍历完了，标记为黑色\n", parent->sign());
 
     parent->set_gc_mark(true);
@@ -81,7 +81,7 @@ void ConcurrentMark::mark() {
 
     }
 
-    // 上一轮扫描结束需要晴空gray table ，否则会重复扫描
+    // 上一轮扫描结束需要清空gray table ，否则会重复扫描
     mark();
 }
 
