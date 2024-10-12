@@ -1,4 +1,4 @@
-# three-color
+# my-three-color
 手写三色标记算法
 
 对象图结构
